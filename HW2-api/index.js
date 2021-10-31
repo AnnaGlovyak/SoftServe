@@ -98,4 +98,4 @@ async function setWeather () {
         </div>`
     }
 }
-// setWeather();
+setWeather();
