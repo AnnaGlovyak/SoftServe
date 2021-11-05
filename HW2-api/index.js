@@ -1,13 +1,14 @@
 async function checkIP () {
-    const URL = 'http://ip-api.com/json/?fields=status,message,country,query';
+    const URL = 'https://api.ipgeolocation.io/ipgeo?apiKey=';
+    const KEY = 'e6d958cea5dd4d83bf9b58ff211bfa9d';
 
-    const IP = await fetch(URL)
+    const IP = await fetch(`${ URL }${ KEY }`)
         .then(response => {
             if (response.status !== 200) {
                 throw new Error ('error in fetch ip');
             } else return response.json();
         })
-        .then(data => data.query)
+        .then(data => data.ip)
         .catch( err => console.log(err));
     
     return IP;
@@ -15,7 +16,7 @@ async function checkIP () {
 
 async function checkWeather (ip) {
     const KEY = '4354a9a971e145e8a7b143607213010';
-    const URL = `http://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${ip}&days=3`;
+    const URL = `https://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${ip}&days=3`;
     const weatherData = {};
 
     await fetch(URL)
